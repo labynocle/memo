@@ -1,0 +1,6 @@
+#
+# The aim of this memo is to have in one place some useful commands about system
+#        by Erwan 'Labynocle' Ben Souiden
+
+# see the uptime all processes
+ps -eo pid,comm,lstart,etime,time,args
