@@ -2,5 +2,20 @@
 # The aim of this memo is to have in one place some useful commands about system
 #        by Erwan 'Labynocle' Ben Souiden
 
+
+# About Process
+###############################################################################
 # see the uptime all processes
 ps -eo pid,comm,lstart,etime,time,args
+
+# funny fork bomb (cf. /etc/security/limits.conf)
+:(){ :|:& };:
+
+# About File
+###############################################################################
+# size in octets of a given file
+stat -c '%s' file.txt
+# timestamp of the latest modifications of a given file
+stat -c '%Y' file.txt 
+
+
