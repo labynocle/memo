@@ -1,0 +1,9 @@
+#
+# The aim of this memo is to have in one place some useful commands about sed
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# Remove color codes (special characters) with sed
+###############################################################################
+# source: http://www.commandlinefu.com/commands/view/3584/remove-color-codes-special-characters-with-sed
+sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
