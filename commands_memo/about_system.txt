@@ -11,12 +11,21 @@ ps -eo pid,comm,lstart,etime,time,args
 # funny fork bomb (cf. /etc/security/limits.conf)
 :(){ :|:& };:
 
+
 # About File
 ###############################################################################
 # size in octets of a given file
 stat -c '%s' file.txt
+
 # timestamp of the latest modifications of a given file
 stat -c '%Y' file.txt 
+
+# find every files newer than a given file:
+touch --date "2010-01-05" /tmp/foo
+find /your/path -type f -newer /tmp/foo
+
+# delete every files which are not modified for 150 days
+find /your/path/ -type f -mtime +150 -exec rm {} \;
 
 # About Device
 ###############################################################################
