@@ -1,0 +1,85 @@
+Howto : Self Signed certificates
+###############################################################################
+
+
+Aim of this howto
+###############################################################################
+To have a simple step by step howto to quickly create your own certificat authority and to sign your own certificat
+
+
+Create the Certificat Authority
+###############################################################################
+
+The certificat auhtority will be available for 3650 days:
+
+$ openssl req -new -x509 -days 3650 -keyout ca.key -out ca.crt
+Generating a 1024 bit RSA private key
+........................++++++
+........++++++
+writing new private key to 'ca.key'
+Enter PEM pass phrase:						<<< set your passphrase and don't forget it!
+Verifying - Enter PEM pass phrase:				<<< confirm
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:FR
+State or Province Name (full name) [Some-State]:France
+Locality Name (eg, city) []:Paris
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Aleikoum
+Organizational Unit Name (eg, section) []:Aleikoum Tech
+Common Name (eg, YOUR name) []:Aleikoum Certificate Authority
+Email Address []:dev@null.net
+
+
+Create the key of for your apache server
+###############################################################################
+
+$ openssl genrsa -out aleikoum.net.key 4096
+Generating RSA private key, 4096 bit long modulus
+........................................................................................................................................................................++
+.....................................................................................................................................................................................................................................................................................................++
+e is 65537 (0x10001)
+$ chmod 400 aleikoum.net.key
+
+
+Create the request (CSR)
+###############################################################################
+
+$ openssl req -new -key aleikoum.net.key -out aleikoum.net.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:FR
+State or Province Name (full name) [Some-State]:France
+Locality Name (eg, city) []:Paris
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Aleikoum
+Organizational Unit Name (eg, section) []:Aleikoum Tech
+Common Name (eg, YOUR name) []:*.aleikoum.net
+Email Address []:dev@null.net
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:					<<< if you want a passphrase it's now!
+An optional company name []:
+
+
+Sign your CSR with your own Certificate Authority
+###############################################################################
+$ openssl x509 -req -days 3600 -in aleikoum.net.csr -CA ../ca.crt -CAkey ../ca.key -CAcreateserial -out aleikoum.net.crt
+Signature ok
+subject=/C=FR/ST=France/L=Paris/O=Aleikoum/OU=Aleikoum Tech/CN=*.aleikoum.net/emailAddress=dev@null.net
+Getting CA Private Key
+Enter pass phrase for ../ca.key:
+
+
+
+
