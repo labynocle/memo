@@ -1,0 +1,15 @@
+#
+# The aim of this memo is to have in one place some useful commands about MySQL
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# About auto_increment
+###############################################################################
+# how to know the interval of your auto_increment ?
+SHOW VARIABLES LIKE 'auto_inc%';
+
+# how to change this interval ?
+SET @@auto_increment_increment=10;
+
+# check the next value
+SHOW TABLE STATUS LIKE "your_table";
