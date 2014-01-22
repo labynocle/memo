@@ -10,6 +10,8 @@ SHOW VARIABLES LIKE 'auto_inc%';
 
 # how to change this interval ?
 SET @@auto_increment_increment=10;
+# permanently by adding this line to the my.cnf:
+auto-increment-increment        = 10
 
 # check the next value
 SHOW TABLE STATUS LIKE "your_table";
