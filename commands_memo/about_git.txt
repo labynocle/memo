@@ -1,0 +1,19 @@
+#
+# The aim of this memo is to have in one place some useful commands about git
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# List all commits from Erwan
+###############################################################################
+# source: http://stackoverflow.com/questions/4259996/how-can-i-view-a-git-log-of-just-one-users-commits
+git log --format='%H %an' | grep Erwan | cut -d ' ' -f1 | xargs -n1 git log -1
+
+
+# Undo the last commit you did
+###############################################################################
+# source: http://stackoverflow.com/questions/927358/how-to-undo-the-last-git-commit
+git reset --soft 'HEAD^
+
+# Beautiful git 'one line' log
+###############################################################################
+git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
