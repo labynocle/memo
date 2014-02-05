@@ -17,3 +17,17 @@ git reset --soft 'HEAD^'
 # Beautiful git 'one line' log
 ###############################################################################
 git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
+
+# 
+###############################################################################
+# download https://github.com/git/git/tree/master/contrib/diff-highlight 
+# then chmod +x and add it to your PATH
+# finally add the following line to the ~/.gitconfig
+[color]
+	diff = auto
+	log = auto
+	show = auto
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
