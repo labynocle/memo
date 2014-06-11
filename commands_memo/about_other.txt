@@ -1,0 +1,9 @@
+#
+# The aim of this memo is to have in one place some useful commands about other
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# Grep Tips
+###############################################################################
+# count how many $char in $sentence
+grep -o "$char" <<< "$sentence" | wc -l
