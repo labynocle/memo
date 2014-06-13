@@ -27,7 +27,14 @@ find /your/path -type f -newer /tmp/foo
 # delete every files which are not modified for 150 days
 find /your/path/ -type f -mtime +150 -exec rm {} \;
 
+
 # About Device
 ###############################################################################
 # get data about USB device 
 udevadm info --query=all -n /dev/sdg
+
+
+# Abou Debian
+###############################################################################
+# list every installed packages (with their architectures)
+dpkg-query -W -f='${Package}\t\t${Architecture}\n'
