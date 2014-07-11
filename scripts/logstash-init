@@ -1,0 +1,92 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides: logstash
+# Required-Start:    $network $remote_fs $local_fs
+# Required-Stop:     $network $remote_fs $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: start and stop logstash
+# Description: script to launch the logstash
+### END INIT INFO
+
+
+# create a specific user: 
+#	adduser --system --disabled-password --disabled-login --home /etc/logstash/ --no-create-home --force-badname --group _logstash
+LOGSTASH_USER='_logstash'
+LOGSTASH_DIR='/usr/local/logstash'
+LOGSTASH_BIN="$LOGSTASH_DIR/bin/logstash"
+LOGSTASH_CONFIG_DIR='/etc/logstash/conf.d/'
+LOGSTASH_OPTIONS='--verbose'
+
+PID_FILE='/var/run/logstash.pid'
+LOG_FILE='/var/log/logstash/logstash.log'
+
+# #############################################################################
+# 		Don't touch anything under this line!
+# 		You shall not pass - Gandalf is watching you
+# #############################################################################
+
+case "$1" in
+	start)
+
+		$0 configtest > /dev/null 2>&1
+		EXIT_STATUS=$?
+		[ $EXIT_STATUS -ne 0 ] && echo "logstash configuration ($LOGSTASH_CONFIG_DIR) is not ok..." && exit 1
+
+		[ ! -d "`dirname $LOG_FILE`" ] && mkdir "`dirname $LOG_FILE`" && chown $LOGSTASH_USER "`dirname $LOG_FILE`"
+
+		echo "Starting logstash..."
+		start-stop-daemon --start --background --pidfile $PID_FILE --make-pidfile \
+			--user $LOGSTASH_USER --chuid $LOGSTASH_USER --chdir $LOGSTASH_DIR \
+			--exec $LOGSTASH_BIN -- \
+			$LOGSTASH_OPTIONS -f $LOGSTASH_CONFIG_DIR --log $LOG_FILE
+		EXIT_STATUS=$?
+		[ $EXIT_STATUS -eq 0 ] && echo "logstash well started"
+		[ $EXIT_STATUS -ne 0 ] && echo "logstash not well started"
+
+		exit $EXIT_STATUS
+	;;
+
+	stop)
+		echo "Stopping logstash..."
+		start-stop-daemon --stop --pidfile $PID_FILE --user $LOGSTASH_USER \
+			--retry=TERM/30/KILL/5
+		EXIT_STATUS=$?
+		[ $EXIT_STATUS -eq 0 ] && echo "logstash well stopped"
+		[ $EXIT_STATUS -eq 1 ] && echo "logstash well not stopped"
+		[ $EXIT_STATUS -eq 2 ] && echo "logstash well stopped - but after several retries"
+		[ $EXIT_STATUS -eq 3 ] && echo "logstash not stopped"
+
+	        exit $EXIT_STATUS
+	;;
+
+	restart)
+		$0 stop
+		sleep 2
+		$0 start
+	;;
+
+	status)
+		start-stop-daemon --verbose --status --pidfile $PID_FILE --user $LOGSTASH_USER
+		EXIT_STATUS=$?
+		[ $EXIT_STATUS -eq 0 ] && echo "logstash is running"
+		[ $EXIT_STATUS -eq 1 ] && echo "logstash is not running but $PID_FILE exists"
+		[ $EXIT_STATUS -eq 3 ] && echo "logstash is not running"
+		[ $EXIT_STATUS -eq 4 ] && echo "unable to say something about the logstash status"
+
+		exit $EXIT_STATUS
+	;;
+
+	configtest)
+		$LOGSTASH_BIN --configtest $LOGSTASH_OPTIONS -f $LOGSTASH_CONFIG_DIR
+	
+		exit $?
+	;;
+
+	*)
+		echo "Usage: $0 {start|stop|restart|status|configtest}"
+
+		exit 1
+	;;
+esac
