@@ -79,6 +79,7 @@ case "$1" in
 	;;
 
 	configtest)
+		echo "Checking logstash config ($LOGSTASH_CONFIG_DIR)..."
 		$LOGSTASH_BIN --configtest $LOGSTASH_OPTIONS -f $LOGSTASH_CONFIG_DIR
 	
 		exit $?
