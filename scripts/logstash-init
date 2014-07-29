@@ -2,8 +2,8 @@
 
 ### BEGIN INIT INFO
 # Provides: logstash
-# Required-Start:    $network $remote_fs $local_fs
-# Required-Stop:     $network $remote_fs $local_fs
+# Required-Start:    $network $remote_fs $local_fs sudo
+# Required-Stop:     $network $remote_fs $local_fs sudo
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: start and stop logstash
