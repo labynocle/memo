@@ -1,0 +1,15 @@
+#
+# The aim of this memo is to have in one place some useful commands about other
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# Grep Tips
+###############################################################################
+# count how many $char in $sentence
+grep -o "$char" <<< "$sentence" | wc -l
+
+
+# Misc Tips
+###############################################################################
+# json pretty output (you first need the yajl-tools package) 
+echo '{"plop":42, "plip":"paloup"}' | json_reformat
