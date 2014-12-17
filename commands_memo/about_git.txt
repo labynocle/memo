@@ -18,6 +18,10 @@ git reset --soft 'HEAD^'
 ###############################################################################
 git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
 
+# List all branches with the timestamp of the last commit + sorted
+###############################################################################
+for b in `git branch `; do git log -1 --format="[%ct] [%H] $b - %s " "$b"; done|sort -nr
+
 # 
 ###############################################################################
 # download https://github.com/git/git/tree/master/contrib/diff-highlight 
