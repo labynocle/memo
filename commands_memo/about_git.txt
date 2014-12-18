@@ -8,7 +8,6 @@
 # source: http://stackoverflow.com/questions/4259996/how-can-i-view-a-git-log-of-just-one-users-commits
 git log --format='%H %an' | grep Erwan | cut -d ' ' -f1 | xargs -n1 git log -1
 
-
 # Undo the last commit you did
 ###############################################################################
 # source: http://stackoverflow.com/questions/927358/how-to-undo-the-last-git-commit
@@ -22,7 +21,7 @@ git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
 ###############################################################################
 for b in `git branch `; do git log -1 --format="[%ct] [%H] $b - %s " "$b"; done|sort -nr
 
-# 
+# Nice color with git command 
 ###############################################################################
 # download https://github.com/git/git/tree/master/contrib/diff-highlight 
 # then chmod +x and add it to your PATH
@@ -35,3 +34,10 @@ for b in `git branch `; do git log -1 --format="[%ct] [%H] $b - %s " "$b"; done|
 	log = diff-highlight | less
 	show = diff-highlight | less
 	diff = diff-highlight | less
+
+# Useful git aliases
+###############################################################################
+# add the following line to the ~/.gitconfig
+[alias]
+	olog = log -p --color
+	plog = log --pretty=format:"%h%x09%an%x09%ad%x09%s"
