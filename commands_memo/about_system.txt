@@ -38,3 +38,9 @@ udevadm info --query=all -n /dev/sdg
 ###############################################################################
 # list every installed packages (with their architectures)
 dpkg-query -W -f='${Package}\t\t${Architecture}\n'
+
+
+# About ps
+###############################################################################
+# list and kill every process with the pattern plop (easy tip from my colleague Nicolas Ramy)
+ps -ef | grep plop | grep -v grep | awk '{print $2}' | xargs kill -9
