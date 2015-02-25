@@ -27,3 +27,7 @@ curl ipecho.net/plain
 # find an IP according to the MAC address
 fping -c 1 -g -q 10.0.0.0/16
 arp -n | grep -i "AA:BB:11:DD:22:44"
+
+# basic one liner to extract the IP of a given interface
+#	from http://stackoverflow.com/questions/21336126/linux-bash-script-to-extract-ip-address
+/sbin/ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'
