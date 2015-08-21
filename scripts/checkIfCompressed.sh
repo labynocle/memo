@@ -60,7 +60,7 @@ do
 	
 	if [ $TYPE_TO_CHECK == "PNG" ]
 	then
-		pngcrush -rem alla -reduce $fileCheck $FILE_LOSSLESS > /dev/null 2>&1
+		pngcrush -rem allb -brute $fileCheck $FILE_LOSSLESS > /dev/null 2>&1
 		STATUS=$?
 	elif [ $TYPE_TO_CHECK == "JPG" ]
 	then
@@ -97,7 +97,7 @@ done
 
 if [ "$RETURN_LINE" != "" ]
 then
-	CMD_SAMPLE='pngcrush -rem alla -reduce FILE_TO_COMPRESS FILE_RESULT_LOSSLESS > /dev/null 2>&1'
+	CMD_SAMPLE='pngcrush -rem allb -brute FILE_TO_COMPRESS FILE_RESULT_LOSSLESS > /dev/null 2>&1'
 	[ $TYPE_TO_CHECK == "JPG" ] && CMD_SAMPLE='jpegtran -copy none -optimize -perfect FILE_TO_COMPRESS > FILE_RESULT_LOSSLESS 2> /dev/null'
 
 	(echo "Subject: $MAIL_SUBJECT"; \
