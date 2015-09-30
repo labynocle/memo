@@ -13,3 +13,10 @@ grep -o "$char" <<< "$sentence" | wc -l
 ###############################################################################
 # json pretty output (you first need the yajl-tools package) 
 echo '{"plop":42, "plip":"paloup"}' | json_reformat
+
+
+# Bash Tips
+###############################################################################
+# how to check if a variable is an int or not
+INTEGER_PATTERN='^[0-9]+$'
+[[ ! ${MY_INTEGER} =~ $INTEGER_PATTERN ]] && echo "${MY_INTEGER} should be an integer" && exit 1
