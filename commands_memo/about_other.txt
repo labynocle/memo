@@ -20,3 +20,9 @@ echo '{"plop":42, "plip":"paloup"}' | json_reformat
 # how to check if a variable is an int or not
 INTEGER_PATTERN='^[0-9]+$'
 [[ ! ${MY_INTEGER} =~ $INTEGER_PATTERN ]] && echo "${MY_INTEGER} should be an integer" && exit 1
+
+
+# Xz file
+###############################################################################
+# extract xz file
+xz -dc $file.xz > $file
