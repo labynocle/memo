@@ -1,0 +1,20 @@
+#
+# The aim of this memo is to have in one place some useful commands about ES
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# force reaollacation 
+###############################################################################
+curl -XPOST 'localhost:9200/_cluster/reroute' -d '{                                                                                                
+        "commands" : [ {
+              "allocate" : {
+                  "index" : "my_index", 
+                  "shard" : 1, 
+                  "node" : "node-01.aleikoum.net", 
+                  "allow_primary" : true
+              }
+            }
+        ]
+    }
+'
+
