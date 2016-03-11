@@ -14,6 +14,9 @@ grep -o "$char" <<< "$sentence" | wc -l
 # json pretty output (you first need the yajl-tools package) 
 echo '{"plop":42, "plip":"paloup"}' | json_reformat
 
+# extract xz file
+xz -dc $file.xz > $file
+
 
 # Bash Tips
 ###############################################################################
@@ -22,7 +25,7 @@ INTEGER_PATTERN='^[0-9]+$'
 [[ ! ${MY_INTEGER} =~ $INTEGER_PATTERN ]] && echo "${MY_INTEGER} should be an integer" && exit 1
 
 
-# Xz file
+# Curl Tips
 ###############################################################################
-# extract xz file
-xz -dc $file.xz > $file
+# only retrieve the HTTP code status
+curl -sL -w "%{http_code}" "$URL" -o /dev/null
