@@ -27,6 +27,9 @@ find /your/path -type f -newer /tmp/foo
 # delete every files which are not modified for 150 days
 find /your/path/ -type f -mtime +150 -exec rm {} \;
 
+# find and sort by mtime
+find /your/path -type f -printf "%T@ %Tc %p\n" | sort -n | sed -e "s/.* //g"
+
 
 # About Device
 ###############################################################################
