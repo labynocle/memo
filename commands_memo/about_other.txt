@@ -24,6 +24,9 @@ xz -dc $file.xz > $file
 INTEGER_PATTERN='^[0-9]+$'
 [[ ! ${MY_INTEGER} =~ $INTEGER_PATTERN ]] && echo "${MY_INTEGER} should be an integer" && exit 1
 
+# generate random string
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1
+
 
 # Curl Tips
 ###############################################################################
