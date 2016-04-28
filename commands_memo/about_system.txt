@@ -30,6 +30,10 @@ find /your/path/ -type f -mtime +150 -exec rm {} \;
 # find and sort by mtime
 find /your/path -type f -printf "%T@ %Tc %p\n" | sort -n | sed -e "s/.* //g"
 
+# allow to see deleted files which doesn't release the space
+# because some process keep an opened file descriptor on it
+lsof -nP | grep '(deleted)'
+
 
 # About Device
 ###############################################################################
