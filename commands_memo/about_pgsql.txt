@@ -1,0 +1,54 @@
+#
+# The aim of this memo is to have in one place some useful commands about PostgreSQL
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# Server activity
+#############################################################################
+
+select state, count(*) from pg_stat_activity group by state;
+select state, waiting, count(*) from pg_stat_activity group by state, waiting;
+
+# Size
+#############################################################################
+# size of a table
+select pg_size_pretty(pg_total_relation_size('TABLENAME'));
+
+# size of all tables of the current db
+SELECT
+   relname as "Table",
+   pg_size_pretty(pg_total_relation_size(relid)) As "Size",
+   pg_size_pretty(pg_total_relation_size(relid) - pg_relation_size(relid)) as "External Size"
+   FROM pg_catalog.pg_statio_user_tables ORDER BY pg_total_relation_size(relid) DESC;
+
+# Vacuum
+#############################################################################
+# last vacuum and analyze on all tables from public
+select relname, last_vacuum, last_analyze from pg_stat_all_tables where schemaname = 'public';
+
+# pg_stat_statements
+#############################################################################
+# install the pg_stat_statements extension
+create extension pg_stat_statements ;
+
+#
+#    The total time a query has occupied against your system in minutes
+#    The average time it takes to run in milliseconds
+#    The query itself
+
+SELECT 
+  (total_time / 1000 / 60) as total_minutes, 
+  (total_time/calls) as average_time, 
+  calls,
+  query 
+FROM pg_stat_statements 
+ORDER BY 1 DESC 
+LIMIT 100;
+
+
+
+
+
+select relpages, relpages / reltuples, relpages / 80 from pg_class where oid = 'TABLENAME'::regclass;
+select oid::regclass, relpages, reltuples, reltuples/relpages from pg_class where oid in ('TABLENAME01'::regclass, 'TABLENAME02'::regclass);
+
