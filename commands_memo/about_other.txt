@@ -17,6 +17,9 @@ echo '{"plop":42, "plip":"paloup"}' | json_reformat
 # extract xz file
 xz -dc $file.xz > $file
 
+# reindent json file
+python3.4 -m json.tool $file
+
 
 # Bash Tips
 ###############################################################################
