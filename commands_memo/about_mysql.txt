@@ -26,3 +26,7 @@ GROUP  BY table_schema;
 # Restore gzip dump
 ###############################################################################
 gunzip < dump_file.sql.gz | mysql -u $USER -p $DBNAME
+
+# List tables not like
+###############################################################################
+SHOW TABLES WHERE `Tables_in_$DBNAME` NOT LIKE '$PATTERN%';
