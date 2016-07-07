@@ -23,6 +23,7 @@ tcpdump -pni eth0 icmp
 
 # curl to know your public IP
 curl ipecho.net/plain
+curl ipinfo.io/ip
 
 # find an IP according to the MAC address
 fping -c 1 -g -q 10.0.0.0/16
