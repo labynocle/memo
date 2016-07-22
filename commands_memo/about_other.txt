@@ -36,6 +36,7 @@ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1
 # in PIPESTATUS you get all the exit status of a piped command
 if [ `echo "${PIPESTATUS[@]}" | tr -s ' ' + | bc` -ne 0 ]; then echo FAIL;
 
+
 # Curl Tips
 ###############################################################################
 # only retrieve the HTTP code status
