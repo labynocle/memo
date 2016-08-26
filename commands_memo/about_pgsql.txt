@@ -77,3 +77,9 @@ LIMIT 100;
 select relpages, relpages / reltuples, relpages / 80 from pg_class where oid = 'TABLENAME'::regclass;
 select oid::regclass, relpages, reltuples, reltuples/relpages from pg_class where oid in ('TABLENAME01'::regclass, 'TABLENAME02'::regclass);
 
+# PgRestore
+#############################################################################
+# restore only tables and data
+${PGRESTORE_BIN} --list ${DUMP_FILE} | grep TABLE > ${DUMP_FILE_TABLE_ONLY}
+[[ ${PIPESTATUS[0]} -ne 0 ]] && return 1
+${PGRESTORE_BIN} -d ${DB_NAME} -U ${DB_NAME} -h ${PG_HOST} -p ${PG_PORT} -c --if-exist --use-list="${DUMP_FILE_TABLE_ONLY}" ${DUMP_FILE} 2>&1
