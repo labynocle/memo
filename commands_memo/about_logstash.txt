@@ -1,0 +1,14 @@
+#
+# The aim of this memo is to have in one place some useful commands about ES
+#         by Erwan 'Labynocle' Ben Souiden
+
+
+# how to simply test a logstash configuration?
+###############################################################################
+# pretty simple:
+#   - create a config directory with all the files you want to test
+#   - and run the following docker command (adapt logstash version to your needs)
+docker run -i \
+  -v "/path/to/config/:/etc/logstash/conf.d/" \
+  logstash:1.5.4 \
+  -f "/etc/logstash/conf.d/"
