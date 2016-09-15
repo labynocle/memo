@@ -1,5 +1,5 @@
 #
-# The aim of this memo is to have in one place some useful commands about ES
+# The aim of this memo is to have in one place some useful commands about Logstash
 #         by Erwan 'Labynocle' Ben Souiden
 
 
