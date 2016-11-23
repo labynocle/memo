@@ -1,0 +1,10 @@
+#
+# The aim of this memo is to have in one place some useful commands about SSL
+#        by Erwan 'Labynocle' Ben Souiden
+
+
+# check if a certificat matchs a key (all result should be the same)
+###############################################################################
+openssl x509 -noout -modulus -in server.crt | openssl md5
+openssl rsa -noout -modulus -in server.key | openssl md5
+openssl req -noout -modulus -in server.csr | openssl md5
