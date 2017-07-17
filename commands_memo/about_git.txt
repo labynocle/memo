@@ -38,6 +38,7 @@ for b in `git branch `; do git log -1 --format="[%ct] [%H] $b - %s " "$b"; done|
 # Useful git aliases
 ###############################################################################
 # add the following line to the ~/.gitconfig
+# please note, I wrote an article about it for Toucan Toco: https://toucantoco.com/en/tech-blog/tech/git-aliases
 [alias]
 	olog = log -p --color
 	plog = log --pretty=format:"%h%x09%an%x09%ad%x09%s"
