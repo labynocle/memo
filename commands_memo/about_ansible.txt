@@ -1,14 +1,8 @@
 #
-# The aim of this memo is to have in one place some useful commands about Ansible
-#     by Erwan 'Labynocle' Ben Souiden
+# The aim of this memo is to have in one place some memos about ansible
+#        by Erwan 'Labynocle' Ben Souiden
 
 
-# create a variable es_ip with all the IP of a given group 'infra_espp'
-# in vars files
-# es_ip will be like: '10.10.2.76','10.10.2.77','10.10.2.78'
-###############################################################################
-es_ip: |-
-                    {% set comma = joiner(",") %}
-                    {% for host in groups['infra_espp'] -%}
-                      {{ comma() }}'{{ hostvars[host]['ansible_eth0']['ipv4']['address']}}'
-                    {%- endfor -%}
+# see all the variables return thanks
+- debug:
+    msg:"{{ hostvars[inventory_hostname] }}"
