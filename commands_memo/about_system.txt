@@ -41,6 +41,12 @@ lsof -nP | grep '(deleted)'
 udevadm info --query=all -n /dev/sdg
 
 
+# About FS
+###############################################################################
+# apply your new fstab conf to /partition
+mount -o remount /partition
+
+
 # Abou Debian
 ###############################################################################
 # list every installed packages (with their architectures)
