@@ -8,6 +8,9 @@
 # see the uptime all processes
 ps -eo pid,comm,lstart,etime,time,args
 
+# see niceness of all processes
+ps ax -o pid,ni,cmd
+
 # funny fork bomb (cf. /etc/security/limits.conf)
 :(){ :|:& };:
 
