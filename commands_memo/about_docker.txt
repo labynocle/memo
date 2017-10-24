@@ -7,3 +7,7 @@
 ###############################################################################
 # source: https://www.reddit.com/r/docker/comments/3sn5ro/docker_stats_all_running_images/
 docker stats $(docker ps --format '{{.Names}}')
+
+# Remove all containers in exited status
+###############################################################################
+docker rm -v $(docker ps -a -q -f status=exited)
