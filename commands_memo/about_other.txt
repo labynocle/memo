@@ -44,3 +44,6 @@ curl -sL -w "%{http_code}" "$URL" -o /dev/null
 
 # dump des headers
 curl -s -D - "$URL" -o /dev/null
+
+# display the final effective url
+curl -Ls -o /dev/null -w %{url_effective} "$URL"
