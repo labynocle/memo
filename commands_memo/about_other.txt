@@ -47,3 +47,10 @@ curl -s -D - "$URL" -o /dev/null
 
 # display the final effective url
 curl -Ls -o /dev/null -w %{url_effective} "$URL"
+
+# Use a SSH container
+###############################################################################
+$ docker pull krlmlr/debian-ssh
+$ docker run -p 22:22 -e SSH_KEY="`cat ~/.ssh/id_rsa.pub`" krlmlr/debian-ssh
+$ ssh root@127.0.0.1 "ls /tmp"
+ssh-kKaD8H56nz
