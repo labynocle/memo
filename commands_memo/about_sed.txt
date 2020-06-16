@@ -13,3 +13,7 @@ sed -r "s:\x1B\[[0-9;]*[mK]::g"
 ###############################################################################
 sed -e "s/^M//g" /path/to/file_with_M >> /path/to/file_clean
 nota: ^M could be reproduce via : Ctrl+V then Ctrl+M
+
+# Remove a block from your pattern until the next blank line
+###############################################################################
+sed -i '/^your pattern$/,/^$/d' /path/to/file
